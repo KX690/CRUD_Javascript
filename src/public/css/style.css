@@ -1,0 +1,38 @@
+.container{
+    display:flex;
+    padding: 20px;
+    flex-flow: column wrap;
+}
+.datos, .carga{
+    margin: 20px;
+}
+
+.form-card {
+    margin-top: 20px;
+    margin-left: 10px; 
+}
+
+.table th, .table td {
+    max-width: 200px; 
+    word-wrap: break-word; 
+}
+.voto{
+    border-radius: 5px;
+    color:black;
+}
+.editar, .eliminar{
+    width: 150px;
+    border: 2px solid ;
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .container.d-flex {
+        flex-direction: column;
+    }
+    .form-card {
+        margin-top: 10px;
+        margin-left: 0; 
+    }
+}
+

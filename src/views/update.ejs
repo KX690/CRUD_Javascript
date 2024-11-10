@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Cursos de Java</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a href="/" class="navbar-brand">Edicion de datos</a>
+    </nav>
+
+    <div class="container">
+        <div class="carga">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/update/<%= data.id %>" method="post">
+                        <div class="form-group">
+                            <input type="text" name="titulo" placeholder="Título" value="<%= data.titulo%>" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="descripcion" placeholder="Descripción" value="<%= data.descripcion%>" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="link" placeholder="Link" value="<%= data.link%>" class="form-control">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Guardar Curso</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>
