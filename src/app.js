@@ -7,7 +7,7 @@ const myConnection = require('express-myconnection');
 
 const app = express();
 
-const customerRoutes = require('./routes/customer');
+const customerRoutes = require('./routes/endpoint');
 
 app.set('port', process.env.PORT || 3000);
 app.set('view engine','ejs');

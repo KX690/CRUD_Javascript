@@ -5,7 +5,7 @@ controller.list = (req, res)=>{
     {
         conn.query('SELECT * FROM customer ORDER BY votos DESC', (err, result)=> {
             
-            res.render('customers',{
+            res.render('index',{
                 data: result
                 
 
