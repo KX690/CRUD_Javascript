@@ -10,6 +10,6 @@ router.get('/delete/:id', controller.delete);
 router.get('/update/:id', controller.edit);
 router.post('/update/:id', controller.update);
 
-router.get('/increment-votes/:id', controller.incrementVotes);
+router.post('/increment-votes/:id', controller.incrementVotes);
 
 module.exports = router;
