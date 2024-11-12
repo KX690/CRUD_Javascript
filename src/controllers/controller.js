@@ -1,65 +1,58 @@
-const controller ={};
+const customerModel = require('../models/cursosModels');
 
-controller.list = (req, res)=>{
-    req.getConnection((err,conn)=>
-    {
-        conn.query('SELECT * FROM customer ORDER BY votos DESC', (err, result)=> {
-            
-            res.render('index',{
-                data: result
-                
+const controller = {};
 
-            });
+controller.list = (req, res) => {
+    req.getConnection((err, conn) => {
+        if (err) throw err;
+        customerModel.getAll(conn, (err, result) => {
+            if (err) throw err;
+            res.render('index', { data: result });
         });
     });
 };
-controller.save =(req,res) =>{
-    
+
+controller.save = (req, res) => {
     const data = req.body;
-    req.getConnection((err,conn)=>{
-        conn.query('INSERT INTO customer set ?', [data], (err, result)=>{
-           
+    req.getConnection((err, conn) => {
+        if (err) throw err;
+        customerModel.insert(conn, data, (err, result) => {
+            if (err) throw err;
             res.redirect('/');
-            
-        })
-    })
-    
+        });
+    });
 };
 
-controller.edit=(req,res)=>{
+controller.edit = (req, res) => {
     const id = req.params.id;
     req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM customer WHERE id = ?', [id], (err, result) => {
-           
-            res.render('update',{
-                data: result[0]
-            });
-            
+        if (err) throw err;
+        customerModel.getById(conn, id, (err, result) => {
+            if (err) throw err;
+            res.render('update', { data: result[0] });
         });
     });
+};
 
-}
-
-controller.update=(req,res)=>{
+controller.update = (req, res) => {
     const id = req.params.id;
     const newCustomer = req.body;
     req.getConnection((err, conn) => {
-        conn.query('UPDATE customer set ? WHERE id = ?', [newCustomer,id], (err, result) => {
-           
+        if (err) throw err;
+        customerModel.update(conn, id, newCustomer, (err, result) => {
+            if (err) throw err;
             res.redirect('/');
-            
         });
     });
-
-}
+};
 
 controller.delete = (req, res) => {
     const id = req.params.id;
     req.getConnection((err, conn) => {
-        conn.query('DELETE FROM customer WHERE id = ?', [id], (err, result) => {
-           
+        if (err) throw err;
+        customerModel.delete(conn, id, (err, result) => {
+            if (err) throw err;
             res.redirect('/');
-            
         });
     });
 };
@@ -67,9 +60,12 @@ controller.delete = (req, res) => {
 controller.incrementVotes = (req, res) => {
     const id = req.params.id;
     req.getConnection((err, conn) => {
-        conn.query('UPDATE customer SET votos = votos + 1 WHERE id = ?', [id], (err, result) => {
+        if (err) throw err;
+        customerModel.incrementVotes(conn, id, (err, result) => {
+            if (err) throw err;
             res.redirect('/');
         });
     });
 };
+
 module.exports = controller;
