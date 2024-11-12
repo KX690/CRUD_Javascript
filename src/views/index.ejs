@@ -52,8 +52,10 @@
                                 <td><%= data[i].descripcion %></td>
                                 <td><a href="<%= data[i].link %>" target="_blank"><%= data[i].link %></a></td>
                                 <td>
-                                    <a href="/increment-votes/<%= data[i].id %>" class="btn btn-success voto">
-                                        <%= data[i].votos %>
+                                    <a href="#"
+                                       class="btn btn-success voto"
+                                       onclick="incrementVotes(<%= data[i].id %>, this)">
+                                       <%= data[i].votos %>
                                     </a>
                                 </td>
                                 <td>                                       
@@ -71,5 +73,22 @@
             </table>
         </div>
     </div>
+
+    <script>
+        function incrementVotes(id, button) {
+            fetch(`/increment-votes/${id}`, {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    button.innerHTML = data.votos;
+                } else {
+                    alert("Error al incrementar votos");
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 </body>
 </html>
