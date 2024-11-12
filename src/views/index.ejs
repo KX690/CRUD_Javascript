@@ -54,7 +54,7 @@
                                 <td>
                                     <a href="#"
                                        class="btn btn-success voto"
-                                       onclick="incrementVotes(<%= data[i].id %>, this)">
+                                       onclick="incrementVotes(<%= data[i].id %>)">
                                        <%= data[i].votos %>
                                     </a>
                                 </td>
@@ -75,7 +75,7 @@
     </div>
 
     <script>
-        function incrementVotes(id, button) {
+        function incrementVotes(id) {
             fetch(`/increment-votes/${id}`, {
                 method: 'POST'
             })
