@@ -60,10 +60,17 @@ controller.delete = (req, res) => {
 controller.incrementVotes = (req, res) => {
     const id = req.params.id;
     req.getConnection((err, conn) => {
-        if (err) throw err;
-        customerModel.incrementVotes(conn, id, (err, result) => {
-            if (err) throw err;
-            res.redirect('/');
+        if (err) return res.json({ success: false, error: err });
+
+        customerModel.incrementVotes(conn, id, (err) => {
+            if (err) return res.json({ success: false, error: err });
+
+            // Obtener el nuevo número de votos para enviar de vuelta al frontend
+            customerModel.getVotesById(conn, id, (err, rows) => {
+                if (err) return res.json({ success: false, error: err });
+                const votos = rows[0].votos;
+                res.json({ success: true, votos: votos });
+            });
         });
     });
 };
